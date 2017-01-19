@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/01/19 11:38:36 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:49:06 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void		set_point(t_point *pt, int x, int y)
 
 /*
 ** Tu dois changer cette fonction
+** j'appelle cette fonction dans le main. il faut qu'elle renvois une liste chaine de type t_bricks *
+** pas grand chose a dire en plus :p.
 */
 
 t_bricks	*init(void)
