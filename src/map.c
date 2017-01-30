@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 10:38:19 by hhismans          #+#    #+#             */
-/*   Updated: 2017/01/19 10:54:02 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:50:42 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,23 +122,22 @@ void	init_map(char **map, int size)
 ** return 1 if all is fine
 */
 
-int		fill_map(char **map, t_bricks *bricks, char filling_char, t_data pos)
+int		fill_map(char **map, t_bricks *bricks, char filling_char, t_data *pos)
 {
 	int i;
 
 	i = 0;
 	while (i < 4)
 	{
-		if (map[(BRICK_SIZE) + pos.y + bricks->elem[i].y]
-				[(BRICK_SIZE) + pos.x + bricks->elem[i].x] == VOID_BLOCK
-				|| pos.forcerm)
-			map[(BRICK_SIZE) + pos.y + bricks->elem[i].y]
-				[(BRICK_SIZE) + pos.x + bricks->elem[i].x] = filling_char;
+		if (pos->forcerm || map[(BRICK_SIZE) + pos->y + bricks->elem[i].y]
+				[(BRICK_SIZE) + pos->x + bricks->elem[i].x] == VOID_BLOCK)
+			map[(BRICK_SIZE) + pos->y + bricks->elem[i].y]
+				[(BRICK_SIZE) + pos->x + bricks->elem[i].x] = filling_char;
 		else
 		{
 			while (--i >= 0)
-				map[(BRICK_SIZE) + pos.y + bricks->elem[i].y]
-					[(BRICK_SIZE) + pos.x + bricks->elem[i].x] = VOID_BLOCK;
+				map[(BRICK_SIZE) + pos->y + bricks->elem[i].y]
+					[(BRICK_SIZE) + pos->x + bricks->elem[i].x] = VOID_BLOCK;
 			return (0);
 		}
 		i++;

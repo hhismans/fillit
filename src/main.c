@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/01/19 11:49:06 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/01/30 18:07:22 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,19 @@ t_bricks	*init(void)
 	return (ret);
 }
 
+int			lstsize(t_bricks *list)
+{
+	int ret;
+
+	ret = 0;
+	while (list)
+	{
+		list = list->next;
+		ret++;
+	}
+	return (ret);
+}
+
 int			solve(char **map, t_bricks *bricklist, int sizemap, char brick_char)
 {
 	t_data pos;
@@ -105,21 +118,17 @@ int			solve(char **map, t_bricks *bricklist, int sizemap, char brick_char)
 	while (pos.y < sizemap)
 	{
 		pos.x = 0;
-		if (brick_char == 'A')
-			printf("\t%d percent done\n", pos.y * 100 / sizemap);
 		while (pos.x < sizemap)
 		{
-			if (fill_map(map, bricklist, brick_char, pos))
+			if (fill_map(map, bricklist, brick_char, &pos))
 			{
 				if (solve(map, bricklist->next, sizemap, brick_char + 1))
 					return (1);
 				pos.forcerm = 1;
-				fill_map(map, bricklist, VOID_BLOCK, pos);
+				fill_map(map, bricklist, VOID_BLOCK, &pos);
 				pos.forcerm = 0;
 			}
 			pos.x++;
-			if (brick_char == 'A')
-				printf("\t\t %d percent row done\n", pos.x * 100 / sizemap);
 		}
 		pos.y++;
 	}
@@ -130,10 +139,22 @@ int			main(int argc, char **argv)
 {
 	t_bricks	*bricks;
 	char		**map;
-	int			size;
+	int			_size = 0;
 
-	size = 7; // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
+	int size;
+
+	size = 8; // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
 	bricks = init(); // init bricks, hardcode pour l'instant
+
+	t_bricks *tmp;
+
+	tmp = bricks;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		_size++;
+	}
+	printf("_size = %d\n", _size);
 	draw_bricks(bricks); // not needed
 	map = new_map(size); // init map
 	while (!solve(map, bricks, size, 'A'))
