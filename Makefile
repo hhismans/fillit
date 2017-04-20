@@ -6,7 +6,7 @@
 #    By: hhismans <hhismans@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/02 20:00:21 by hhismans          #+#    #+#              #
-#    Updated: 2017/01/19 11:35:08 by hhismans         ###   ########.fr        #
+#    Updated: 2017/04/19 17:24:03 by hhismans         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME =	fillit
 SRC =	src/main.c			\
 		src/bricks.c			\
 		src/map.c			\
+		src/parse.c			\
 
 LIB =	-lft -L./libft\
 		-I includes/ -I libft/ 

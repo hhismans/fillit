@@ -6,11 +6,21 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/20 19:21:10 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 00:10:02 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int			sqrt_int(int nb)
+{
+	int ret;
+
+	ret = 0;
+	while (ret * ret != nb && ret < INT_MAX)
+		ret++;
+	return (ret);
+}
 
 void		clean_tab(char tab[][4], char empty)
 {
@@ -143,6 +153,7 @@ int			main(int argc, char **argv)
 
 	int size;
 
+/*<<<<<<< Updated upstream
 	size = 8; // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
 	bricks = init(); // init bricks, hardcode pour l'instant
 
@@ -157,6 +168,16 @@ int			main(int argc, char **argv)
 	printf("_size = %d\n", _size);
 	draw_bricks(bricks); // not needed
 	map = new_map(size); // init map
+=======*/
+	bricks = get_bricks_from_file(argv[1]);
+
+	printf("bricks pointeur %p\n", bricks);
+	printf("current size = %d\n", lstsize(bricks));
+	//printf("current_size %d\n", bricks->elem[0].x);
+	//printf("current_size %d\n", lstsize(bricks) * 4);
+	size = sqrt_int(lstsize(bricks) * 4); // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
+	map = new_map(size); // init map
+	printf("current_size %d", lstsize(bricks) * 4);
 	while (!solve(map, bricks, size, 'A'))
 	{
 		printf("current_size %d", size);
@@ -165,7 +186,7 @@ int			main(int argc, char **argv)
 		map = new_map(size); // recreate new map with new size
 	}
 	draw_map(map); // drawing solution found
-	(void)argc;
-	(void)argv;
+//	(void)argc;
+//	(void)argv;*/
 	return (0);
 }

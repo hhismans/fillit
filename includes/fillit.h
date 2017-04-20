@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:03:51 by hhismans          #+#    #+#             */
-/*   Updated: 2017/01/30 17:50:13 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/20 20:45:39 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define EMPTY '.'
 
 # include <stdlib.h>
+# include <limits.h>
 # include <stdio.h>
 # include "libft.h"
 typedef struct	s_point
