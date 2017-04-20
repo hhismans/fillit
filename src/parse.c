@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 16:50:33 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/21 00:21:10 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 01:34:50 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int nb_elem_in_brick(char **brick)
 		j = 0;
 		while (brick[i][j])
 		{
-			//ft_putendl(brick[i]);
 			if (brick[i][j] == FULL)
 				nb++;
 			else if (brick[i][j] != EMPTY && brick[i][j] != '\n')
@@ -88,6 +87,31 @@ int points_are_adjacent(t_point p1, t_point p2)
 			||
 			(p1.y == p2.y && ((p1.x + 1) == p2.x || (p1.x - 1) == p2.x));
 	return (ret);
+}
+
+/*
+** NAME			:	vice cartel to the top
+** DESCRIPTION	:	pasltemps de niaiser
+** INPUT		:	tequila, heineken
+** RETURN VALUE	:	toutltin toutltin toutltin
+** 
+** ndlr: vice cartel == tetrominos
+*/
+void vice_cartel_to_the_top_left(t_bricks *brick)
+{
+	int offsetx;
+	int offsety;
+	int i;
+
+	offsetx = brick->elem[0].x;
+	offsety = brick->elem[0].y;
+	i = 0;
+	while (i < BRICK_SIZE)
+	{
+		brick->elem[i].x -= offsetx;
+		brick->elem[i].y -= offsety;
+		i++;
+	}
 }
 
 int check_points(t_point points[])
@@ -160,14 +184,12 @@ t_bricks *strings_to_bricks(char **string_bricks)
 	elem_i = 0;
 	while (string_bricks[i])
 	{
-		ft_putendl(string_bricks[i]);
 		j = 0;
 		while (string_bricks[i][j])
 		{
 			if (string_bricks[i][j] == FULL)
 			{
-				printf("HEYYYYY\n");
-				set_point(&(bricks->elem[elem_i]), i, j);
+				set_point(&(bricks->elem[elem_i]), j, i);
 				elem_i++;
 				if (elem_i > BRICK_SIZE)
 					ft_error(UNEXPECTED_ERROR);
@@ -176,7 +198,6 @@ t_bricks *strings_to_bricks(char **string_bricks)
 		}
 		i++;
 	}
-				printf("ret %d\n",bricks->elem[0].x);
 	return (bricks);
 }
 
@@ -218,23 +239,13 @@ t_bricks *get_next_brick(const int fd)
 	t_bricks *ret;
 	char **bricks_strings;
 
-	printf("0 \n");
 	bricks_strings = get_next_lines(fd, 4);
-	printf("1 \n");
 	ret = NULL;
-	for (int i = 0;i <4;i++)
-	{
-	//	ft_putstr("XX");
-	//	ft_putendl(bricks_strings[i]);
-	}
-	printf("2 \n");
 	if (bricks_strings)
 	{
 		check_brick(bricks_strings);
 		ret = strings_to_bricks(bricks_strings);
 	}
-	printf("3 \n");
-	//printf("elem %d %d\n", ret->elem[0].x,ret->elem[0].y);
 	return (ret);
 }
 
@@ -251,10 +262,8 @@ t_bricks *get_bricks_from_file(char *path)
 	while ((tmp = get_next_brick(fd)))
 	{
 		get_next_line(fd, &str);
+		vice_cartel_to_the_top_left(tmp);
 		push_back_brick(&brickslist, tmp);
-		printf("brickslist value %p\n", brickslist);
 	}
-
-	printf("bricklist pointeur %p\n", brickslist);
 	return (brickslist);
 }

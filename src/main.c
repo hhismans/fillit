@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/21 00:10:02 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 01:28:18 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,63 +44,6 @@ void		set_point(t_point *pt, int x, int y)
 {
 	pt->x = x;
 	pt->y = y;
-}
-
-/*
-** Tu dois changer cette fonction
-** j'appelle cette fonction dans le main. il faut qu'elle renvois une liste chaine de type t_bricks *
-** pas grand chose a dire en plus :p.
-*/
-
-t_bricks	*init(void)
-{
-	t_bricks *ret;
-	t_bricks *tmp;
-
-	(void)tmp;
-	ret = new_brick();
-	set_point(&(ret->elem[0]), 0, 0);
-	set_point(&(ret->elem[1]), 1, 0);
-	set_point(&(ret->elem[2]), 1, 1);
-	set_point(&(ret->elem[3]), 1, 2);
-
-	int i = 0;
-	while (i < 12)
-	{
-		tmp = new_brick();
-		switch (i % 4){
-
-		case 0 :
-			set_point(&(tmp->elem[0]), 0, 0);
-			set_point(&(tmp->elem[1]), 1, 0);
-			set_point(&(tmp->elem[2]), 1, 1);
-			set_point(&(tmp->elem[3]), 2, 1);
-			break;
-		case 1 :
-			set_point(&(tmp->elem[0]), 0, 0);
-			set_point(&(tmp->elem[1]), 0, 1);
-			set_point(&(tmp->elem[2]), 1, 1);
-			set_point(&(tmp->elem[3]), 2, 1);
-			break;
-		case 2 :
-			set_point(&(tmp->elem[0]), 0, 0);
-			set_point(&(tmp->elem[1]), 1, 0);
-			set_point(&(tmp->elem[2]), 2, 0);
-			set_point(&(tmp->elem[3]), 3, 0);
-			break;
-		case 3 :
-			set_point(&(tmp->elem[0]), 0, 0);
-			set_point(&(tmp->elem[1]), 1, 0);
-			set_point(&(tmp->elem[2]), 1, 1);
-			set_point(&(tmp->elem[3]), 1, 2);
-			break;
-		default :
-			ft_putendl_fd("error init()", 2);
-		}
-		push_back_brick(&ret, tmp);
-		i++;
-	}
-	return (ret);
 }
 
 int			lstsize(t_bricks *list)
@@ -153,40 +96,16 @@ int			main(int argc, char **argv)
 
 	int size;
 
-/*<<<<<<< Updated upstream
-	size = 8; // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
-	bricks = init(); // init bricks, hardcode pour l'instant
-
-	t_bricks *tmp;
-
-	tmp = bricks;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		_size++;
-	}
-	printf("_size = %d\n", _size);
-	draw_bricks(bricks); // not needed
-	map = new_map(size); // init map
-=======*/
 	bricks = get_bricks_from_file(argv[1]);
 
-	printf("bricks pointeur %p\n", bricks);
-	printf("current size = %d\n", lstsize(bricks));
-	//printf("current_size %d\n", bricks->elem[0].x);
-	//printf("current_size %d\n", lstsize(bricks) * 4);
 	size = sqrt_int(lstsize(bricks) * 4); // min size, must be change by "size = sqrt_int(nbr_tetrominos);"
 	map = new_map(size); // init map
-	printf("current_size %d", lstsize(bricks) * 4);
 	while (!solve(map, bricks, size, 'A'))
 	{
-		printf("current_size %d", size);
 		size++; // solution not found, increase size of map
 		free_map(map); // destroy map
 		map = new_map(size); // recreate new map with new size
 	}
 	draw_map(map); // drawing solution found
-//	(void)argc;
-//	(void)argv;*/
 	return (0);
 }

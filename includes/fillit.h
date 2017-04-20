@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:03:51 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/20 20:45:39 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 01:24:33 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,7 @@ void		draw_map(char **map);
 void		init_map(char **map, int size);
 int			fill_map(char **map, t_bricks *bricks, char filling_char,
 		t_data *pos);
+
+t_bricks *get_bricks_from_file(char *path);
+void		set_point(t_point *pt, int x, int y);
 #endif
