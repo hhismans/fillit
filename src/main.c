@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/21 02:07:37 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:10:08 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,31 +89,7 @@ int			lstsize(t_bricks *list)
 */
 int			solve(char **map, t_bricks *bricklist, int sizemap, char brick_char)
 {
-	t_data pos;
-
-	pos.x = 0;
-	pos.y = 0;
-	pos.forcerm = 0;
-	if (!bricklist)
-		return (1);
-	while (pos.y < sizemap)
-	{
-		pos.x = 0;
-		while (pos.x < sizemap)
-		{
-			if (fill_map(map, bricklist, brick_char, &pos))
-			{
-				if (solve(map, bricklist->next, sizemap, brick_char + 1))
-					return (1);
-				pos.forcerm = 1;
-				fill_map(map, bricklist, VOID_BLOCK, &pos);
-				pos.forcerm = 0;
-			}
-			pos.x++;
-		}
-		pos.y++;
-	}
-	return (0);
+	//glhf
 }
 
 int			main(int argc, char **argv)
