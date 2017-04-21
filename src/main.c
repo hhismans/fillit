@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/21 01:59:44 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:07:37 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ int			sqrt_int(int nb)
 	int ret;
 
 	ret = 0;
-	while (ret * ret != nb && ret < INT_MAX)
+	while (ret < 46340)
+	{
+		if (ret * ret == nb)
+			return ret;
 		ret++;
-	return (ret);
+	}
+	return (1);
 }
 
 void		clean_tab(char tab[][4], char empty)
