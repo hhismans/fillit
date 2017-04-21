@@ -6,7 +6,7 @@
 /*   By: hhismans <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 23:02:31 by hhismans          #+#    #+#             */
-/*   Updated: 2017/04/21 01:28:18 by hhismans         ###   ########.fr       */
+/*   Updated: 2017/04/21 01:59:44 by hhismans         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ int			lstsize(t_bricks *list)
 	return (ret);
 }
 
+/*
+** NAME			:	SOLVE
+**
+** DESCRIPTION	:	Fill map with a solution if there's one
+**
+** INPUT		:	map is just a char **tab which is already alocated
+**
+** 					bricklist is a list of brick (tetrominos). see fillit.h to struct data
+** 					example of brick with 4 point "elem" (cf fillit.h)
+** 						brick.elem[0].x = 0		represent:
+** 						brick.elem[0].y = 0		#...	//elem[0] coord (x;y) = (0;0)
+** 						brick.elem[1].x = 1		.#..	//elem[1] coord (x;y) = (1;1)
+** 						brick.elem[1].y = 1		..#.	//elem[2] coord (x;y) = (2;2)
+** 						brick.elem[2].x = 2		....
+** 						brick.elem[2].y = 2
+** 					...which is invalid but it's for the example :D
+**
+** 					-size map, obviously, the actual size of the map
+
+**RETURN VALUE	:	1 if a solution if found, map is fill with solution
+**					0 if not, map content is undetermined
+**
+**	pro tips recursive function ftw
+*/
 int			solve(char **map, t_bricks *bricklist, int sizemap, char brick_char)
 {
 	t_data pos;
